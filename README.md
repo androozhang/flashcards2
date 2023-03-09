@@ -4,7 +4,7 @@ Submitted by: **Andrew Zhange**
 
 This web app: **Quiz how well you know me**
 
-Time spent: *6X** hours spent in total
+Time spent: *6** hours spent in total
 
 ## Required Features
 
