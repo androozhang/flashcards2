@@ -5,12 +5,32 @@ import ReactCardFlip from "react-card-flip";
 const App = () => {
   var [count, setCount] = useState(0);
   const [flip, setFlip] = useState(false);
+  const [guess, setGuess] = useState("");
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
   
   const handleNextCard = () => {
-    setCount(Math.floor(Math.random() * 9) + 1);
+    setCount((count + 1) % cards.length);
     setFlip(false);
+    setGuess("");
+    setIsAnswerCorrect(null); 
+  };
+  
+  const handlePrevCard = () => {
+    setCount((count + cards.length - 1) % cards.length);
+    setFlip(false);
+    setGuess('');
   };
 
+  const handleSubmit = () => {
+    if (guess.toLowerCase() === cards[count].answer.toLowerCase()) {
+      setIsAnswerCorrect(true);
+    } else {
+      setIsAnswerCorrect(false);
+    }
+  };
+  
+  const submitButtonColor = isAnswerCorrect === null ? "gray" : isAnswerCorrect ? "green" : "red";
+  
   return (
     <div className="App">
       <div>
@@ -20,19 +40,32 @@ const App = () => {
       </div>
         
       <div>
-      <ReactCardFlip isFlipped={flip} 
-            flipDirection="vertical">
-            <div onClick={() => setFlip(!flip)} className='front'>
-                {cards[count].question}
-            </div>
-            <div onClick={() => setFlip(!flip)} className='back'>
-              {cards[count].answer}
-            </div>
-      </ReactCardFlip>
+      <ReactCardFlip isFlipped={flip} flipDirection="vertical">
+  <div onClick={() => setFlip(!flip)} className="front">
+    <div className="card-text">{cards[count].question}</div>
+    <div className="card-nav">
+      
+    </div>
+  </div>
+  <div onClick={() => setFlip(!flip)} className="back">
+    <div className="card-text">{cards[count].answer}</div>
+    {guess.toLowerCase() === cards[count].answer.toLowerCase() ? (
+      <div className="feedback correct">Correct!</div>
+    ) : (
+      <div className="feedback incorrect">Incorrect!</div>
+    )}
+    
+  </div>
+</ReactCardFlip>
+      <div>
+  <input type="text" value={guess} onChange={(event) => setGuess(event.target.value)} />
+  <button className="button" style={{ backgroundColor: submitButtonColor }} onClick={handleSubmit}>
+          Submit
+        </button>
+</div>
       </div>
-      <button className="button" onClick={handleNextCard}>
-        Next Card
-      </button>
+      <button onClick={handlePrevCard}>Back</button>
+    <button onClick={handleNextCard}>Next</button>
     </div>
   )
 }
