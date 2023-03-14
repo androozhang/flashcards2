@@ -30,7 +30,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-[![image](https://user-images.githubusercontent.com/82245268/224869491-5be87c2e-e2cd-4b37-8981-415fe6ce819c.png)](https://imgur.com/6Hl33Aa)
+https://i.imgur.com/6Hl33Aa.gif
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
